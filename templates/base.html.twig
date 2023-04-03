@@ -9,20 +9,21 @@
 
         {# Feuilles de styles #}
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" >
-        {% block stylesheets %}
+        {% block stylesheets %} {% endblock %}
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}" >   
-        {% endblock %}
+       
         {# Fichier de javascript #}
-        {% block javascripts %}
-            <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
-            <script src="{{ asset('assets/js/script.js') }}" defer></script>
-        {% endblock %}
+        <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}" defer></script>
+        {% block javascripts %}{% endblock %}
+        <script src="{{ asset('assets/js/script.js') }}" defer></script>
+        
     </head>
     <body>
+    {# HeaderPage #}
         {% include "_navigation/header.html.twig" %}
 
         {% block body %}{% endblock %}
-
+    {# footerPage #}
         {% include "_navigation/footer.html.twig" %}
     </body>
 </html>

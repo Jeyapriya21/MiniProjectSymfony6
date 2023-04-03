@@ -5,10 +5,13 @@ namespace App\Entity;
 use App\Repository\UsersRepository;
 use Doctrine\DBAL\Driver\Mysqli\Initializer\Options;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Query\AST\Functions\CurrentTimestampFunction;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -34,8 +37,8 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 100)]
     private ?string $firstname = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
     public function getId(): ?int
     {
@@ -131,14 +134,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function isVerified(): bool
     {
-        return $this->created_at;
+        return $this->isVerified;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setIsVerified(bool $isVerified): self
     {
-        $this->created_at = $created_at;
+        $this->isVerified = $isVerified;
 
         return $this;
     }

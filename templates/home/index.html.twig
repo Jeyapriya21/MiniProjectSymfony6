@@ -9,5 +9,13 @@
 
 <div class="example-wrapper">
     <h1>Hello Bienvenue sur medical! ✅</h1>
+        {% if app.user %}
+        <div class="mb-3">
+            Vous étes connecté(e) comme utilisateur {{ app.user.lastname }}
+        </div>
+        <div class="m-3">
+            <img src="assets/images/medical.jpg" alt="medical" ></a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}
