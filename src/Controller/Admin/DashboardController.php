@@ -2,10 +2,11 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Article;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use Proxies\__CG__\App\Entity\Users;
+use App\Entity\Users;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,8 +30,9 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToRoute('Users', 'fas fa-user', 'app_users_index');
-        yield MenuItem::linkToCrud('All', 'fa fa-list', Users::class)
+        yield MenuItem::linktoRoute('Back to the website', 'fa-solid fa-backward', 'app_home');
++       yield MenuItem::linkToCrud('Article', 'fa-solid fa-newspaper', Article::class);
+        yield MenuItem::linkToCrud('Users', 'fa fa-user', Users::class)
                     ->setController(UserCrudController::class)
                     ->setPermission('ROLE_ADMIN');
     }
